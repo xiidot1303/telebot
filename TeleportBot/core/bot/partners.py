@@ -4,7 +4,8 @@ from telegram.error import BadRequest
 
 from core.resources import utils, images, strings, keyboards
 from core.services import settings, users
-from .utils import Filters
+# from .utils import Filters
+from telegram.ext import Filters
 
 import os
 
@@ -101,6 +102,6 @@ def partners_close(update, context):
         pass
 
 
-partners_handler = MessageHandler(Filters.PartnersFilter, partners)
+partners_handler = MessageHandler(Filters.text([strings.get_string('menu.partners', 'ru'), strings.get_string('menu.partners', 'uz'), strings.get_string('menu.partners', 'latuz')]), partners)
 tariffs_handler = CallbackQueryHandler(handle_tariffs, pattern='partners:tariffs')
 close_handler = CallbackQueryHandler(partners_close, pattern='partners:close')

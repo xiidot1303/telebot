@@ -3,7 +3,8 @@ from telegram import ParseMode
 
 from core.services import users, settings
 from core.resources import strings, keyboards, images, utils
-from .utils import Filters, Navigation
+from .utils import Navigation
+from telegram.ext import Filters
 from config import Config
 from . import about, account, faq, news, referral
 
@@ -84,7 +85,7 @@ def support(update, context):
 
 
 support_conversation = ConversationHandler(
-    entry_points=[MessageHandler(Filters.SupportFilter, start)],
+    entry_points=[MessageHandler(Filters.text([strings.get_string('menu.support', 'ru'), strings.get_string('menu.support', 'uz'), strings.get_string('menu.support', 'latuz')]), start)],
     states={
         SUPPORT: [MessageHandler(TelegramFilters.text, support)]
     },

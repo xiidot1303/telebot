@@ -2,7 +2,8 @@ from telegram import Update, ParseMode
 from telegram.ext import MessageHandler, CallbackQueryHandler
 from core.resources import strings, keyboards
 from core.services import users
-from .utils import Navigation, Filters
+from .utils import Navigation
+from telegram.ext import Filters
 
 
 def select_role_choice(update: Update, context):
@@ -107,7 +108,7 @@ def user_vacations(update, context):
     context.bot.send_message(chat_id=user_id, text=message, reply_markup=keyboard, parse_mode=ParseMode.HTML)
 
 
-account_handler = MessageHandler(Filters.AccountFilter, start)
+account_handler = MessageHandler(Filters.text([strings.get_string('menu.cabinet', 'ru'), strings.get_string('menu.cabinet', 'uz'), strings.get_string('menu.cabinet', 'latuz')]), start)
 select_role_choice_handler = CallbackQueryHandler(select_role_choice, pattern='^role:.*')
 change_role_handler = CallbackQueryHandler(change_role, pattern='account:role')
 user_resumes_handler = CallbackQueryHandler(user_resumes, pattern='account:resumes')

@@ -6,7 +6,8 @@ from telegram.error import BadRequest
 from telegram import ParseMode, CallbackQuery
 from telegram.ext import MessageHandler, ConversationHandler, CallbackQueryHandler
 from telegram.utils import helpers
-from .utils import Filters
+# from .utils import Filters
+from telegram.ext import Filters
 
 
 RULES, PRIZE_PLACES, RATING = range(3)
@@ -161,7 +162,7 @@ def close(update, context):
         pass
 
 
-referral_handler = MessageHandler(Filters.ReferralFilter, start)
+referral_handler = MessageHandler(Filters.text([strings.get_string('menu.referral', 'ru'), strings.get_string('menu.referral', 'uz'), strings.get_string('menu.referral', 'latuz')]), start)
 check_channel_handler = CallbackQueryHandler(check_channel, pattern='referral:check_channel')
 rules_handler = CallbackQueryHandler(referral_rules, pattern='referral:rules')
 prize_handler = CallbackQueryHandler(prize_places, pattern='referral:prize')

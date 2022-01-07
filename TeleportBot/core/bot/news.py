@@ -4,8 +4,8 @@ from telegram.error import BadRequest
 
 from core.resources import utils, images, strings, keyboards
 from core.services import settings, users
-from .utils import Filters
-
+# from .utils import Filters
+from telegram.ext import Filters
 
 def news(update, context):
     context.user_data['user'] = users.user_exists(update.message.from_user.id)
@@ -45,5 +45,5 @@ def close(update, context):
         pass
 
 
-news_handler = MessageHandler(Filters.NewsFilter, news)
+news_handler = MessageHandler(Filters.text([strings.get_string('menu.news', 'ru'), strings.get_string('menu.news', 'uz'), strings.get_string('menu.news', 'latuz')]), news)
 close_handler = CallbackQueryHandler(close, pattern='news:close')

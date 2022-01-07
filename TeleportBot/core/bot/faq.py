@@ -4,7 +4,7 @@ from telegram.error import BadRequest
 
 from core.resources import utils, images, strings, keyboards
 from core.services import settings, users
-from .utils import Filters
+from telegram.ext import Filters
 
 
 def faq(update, context):
@@ -44,5 +44,5 @@ def close(update, context):
         pass
 
 
-faq_handler = MessageHandler(Filters.FaqFilter, faq)
+faq_handler = MessageHandler(Filters.text([strings.get_string('menu.faq', 'ru'), strings.get_string('menu.faq', 'uz'), strings.get_string('menu.faq', 'latuz')]), faq)
 close_handler = CallbackQueryHandler(close, pattern='faq:close')
