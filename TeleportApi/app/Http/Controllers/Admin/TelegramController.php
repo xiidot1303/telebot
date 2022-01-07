@@ -41,7 +41,13 @@ class TelegramController extends Controller
     private function sendPhoto(\Illuminate\Http\UploadedFile $image, string $text)
     {
         $users = User::where('name', '!=', 'Admin')->get();
-        $client = new \GuzzleHttp\Client(array('base_uri' => 'https://api.telegram.org/bot' . env('TELEGRAM_BOT_TOKEN'). '/'));
+        try {
+            $client = new \GuzzleHttp\Client(array('base_uri' => 'https://api.telegram.org/bot' . env('TELEGRAM_BOT_TOKEN'). '/'));
+        } catch(Exception $e) {
+            // $nothing = true;
+            echo "dede";
+        }
+        
         $imageFileId = null;
         foreach ($users as $user) {
             if ($imageFileId)
@@ -70,7 +76,13 @@ class TelegramController extends Controller
     private function sendText(string $text)
     {
         $users = User::where('name', '!=', 'Admin')->get();
-        $client = new \GuzzleHttp\Client(array('base_uri' => 'https://api.telegram.org/bot' . env('TELEGRAM_BOT_TOKEN'). '/'));
+        try {
+            $client = new \GuzzleHttp\Client(array('base_uri' => 'https://api.telegram.org/bot' . env('TELEGRAM_BOT_TOKEN'). '/'));
+        } catch(Exception $e) {
+            // $nothing = true;
+            echo "dede";
+        }
+
         foreach ($users as $user)
             $client->post('sendMessage', [
                 'json' => ['chat_id' => $user->id, 'text' => $text, 'parse_mode' => 'HTML']
@@ -80,7 +92,13 @@ class TelegramController extends Controller
     private function sendVideo(\Illuminate\Http\UploadedFile $video, string $text)
     {
         $users = User::where('name', '!=', 'Admin')->get();
-        $client = new \GuzzleHttp\Client(array('base_uri' => 'https://api.telegram.org/bot' . env('TELEGRAM_BOT_TOKEN'). '/'));
+        try {
+            $client = new \GuzzleHttp\Client(array('base_uri' => 'https://api.telegram.org/bot' . env('TELEGRAM_BOT_TOKEN'). '/'));
+        } catch(Exception $e) {
+            // $nothing = true;
+            echo "dede";
+        }
+        
         $videoFileId = null;
         foreach ($users as $user) {
             if ($videoFileId)
