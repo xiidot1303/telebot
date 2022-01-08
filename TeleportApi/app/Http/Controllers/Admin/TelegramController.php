@@ -43,7 +43,7 @@ class TelegramController extends Controller
         $users = User::where('name', '!=', 'Admin')->get();
         try {
             $client = new \GuzzleHttp\Client(array('base_uri' => 'https://api.telegram.org/bot' . env('TELEGRAM_BOT_TOKEN'). '/'));
-        } catch(Exception $e) {
+        } catch((ClientException $e) {
             // $nothing = true;
             echo "dede";
         }
@@ -78,7 +78,7 @@ class TelegramController extends Controller
         $users = User::where('name', '!=', 'Admin')->get();
         try {
             $client = new \GuzzleHttp\Client(array('base_uri' => 'https://api.telegram.org/bot' . env('TELEGRAM_BOT_TOKEN'). '/'));
-        } catch(Exception $e) {
+        } catch((ClientException $e) {
             // $nothing = true;
             echo "dede";
         }
@@ -94,7 +94,7 @@ class TelegramController extends Controller
         $users = User::where('name', '!=', 'Admin')->get();
         try {
             $client = new \GuzzleHttp\Client(array('base_uri' => 'https://api.telegram.org/bot' . env('TELEGRAM_BOT_TOKEN'). '/'));
-        } catch(Exception $e) {
+        } catch((ClientException $e) {
             // $nothing = true;
             echo "dede";
         }
