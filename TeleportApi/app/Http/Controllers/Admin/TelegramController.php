@@ -40,7 +40,7 @@ class TelegramController extends Controller
 
     private function sendPhoto(\Illuminate\Http\UploadedFile $image, string $text)
     {
-        try {
+    
         $users = User::where('name', '!=', 'Admin')->get();
         $client = new \GuzzleHttp\Client(array('base_uri' => 'https://api.telegram.org/bot' . env('TELEGRAM_BOT_TOKEN'). '/'));
 
@@ -67,33 +67,32 @@ class TelegramController extends Controller
                 continue;
             }
         }
-        } catch(ClientException $e) {
-            // $nothing = true;
-            echo "dede";
-    }
+
     
     }
 
     private function sendText(string $text)
     {
-        try {
+     
         $users = User::where('name', '!=', 'Admin')->get();
         $client = new \GuzzleHttp\Client(array('base_uri' => 'https://api.telegram.org/bot' . env('TELEGRAM_BOT_TOKEN'). '/'));
 
 
-        foreach ($users as $user)
-            $client->post('sendMessage', [
-                'json' => ['chat_id' => $user->id, 'text' => $text, 'parse_mode' => 'HTML']
-            ]);
-        } catch(ClientException $e) {
-            // $nothing = true;
-            echo "dede";
+        foreach ($users as $user) {
+            try {
+                $client->post('sendMessage', [
+                    'json' => ['chat_id' => $user->id, 'text' => $text, 'parse_mode' => 'HTML']
+                ]);
+
+            } catch (ClientException $e) {
+                continue;
+            }
         }
     }
 
     private function sendVideo(\Illuminate\Http\UploadedFile $video, string $text)
     {
-        try {
+        
         $users = User::where('name', '!=', 'Admin')->get();
         $client = new \GuzzleHttp\Client(array('base_uri' => 'https://api.telegram.org/bot' . env('TELEGRAM_BOT_TOKEN'). '/'));
 
@@ -122,9 +121,6 @@ class TelegramController extends Controller
             }
         }
     
-    } catch((ClientException $e) {
-        // $nothing = true;
-        echo "dede";
-    }
+
     }
 }
